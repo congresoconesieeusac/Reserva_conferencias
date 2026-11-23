@@ -207,6 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
         conferencia_publica: slot.conferencia_publica ?? null
       }));
 
+      console.log('Horarios normalizados:', state.slots);
+      console.log('Primera fecha:', state.slots[0]?.fecha);
+
       state.eventInfo = data.evento || null;
       state.lastUpdateDate = new Date();
 
