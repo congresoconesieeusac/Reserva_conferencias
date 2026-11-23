@@ -8,7 +8,7 @@ const APP_CONFIG = {
   // REQUIRED BOOKMARK: Paste here the URL of the Web App deployed in Apps Script
   // Example: "https://script.google.com/macros/s/AKfycbx.../exec"
   // =========================================================================
-  API_URL: 'https://script.google.com/macros/s/AKfycbzVdFj71n5WzMdxHnnsWR7LeZR74LLwJQ9_E1kUhCxshpbyZDYF_WNtKlJ4gNb0SgE/exec',
+  API_URL: 'https://script.google.com/macros/s/AKfycby3dcrSMsFnarjslQ0xlnmFS6QuqscFqLe-5xBX0bdeDUQ1BiJsNDqeBtnhQxuks4Vg/exec',
 
   // Automatic polling interval in milliseconds (20 seconds)
   POLLING_INTERVAL_MS: 20000,
