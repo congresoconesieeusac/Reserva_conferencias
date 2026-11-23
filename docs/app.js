@@ -178,9 +178,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let block = 0;
 
     slots.forEach(s => {
-      if (s.Estado === 'Disponible') avail++;
-      else if (s.Estado === 'Reservado') res++;
-      else if (s.Estado === 'Bloqueado' || s.Estado === 'Cancelado') block++;
+      if (s.estado === 'Disponible') avail++;
+      else if (s.estado === 'Reservado') res++;
+      else if (s.estado === 'Bloqueado' || s.estado === 'Cancelado') block++;
     });
 
     DOM.statTotal.textContent = total;
@@ -198,12 +198,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await ApiService.fetchSlots();
       
       state.slots = (data.horarios || []).map(slot => ({
-        id: slot.ID_Horario ?? slot.id,
-        fecha: slot.Fecha ?? slot.fecha,
+        id: slot.id ?? slot.id,
+        fecha: slot.fecha ?? slot.fecha,
         hora_inicio: slot.Hora_inicio ?? slot.hora_inicio,
         hora_fin: slot.Hora_Fin ?? slot.hora_fin,
         sede: slot.Sede ?? slot.sede,
-        estado: slot.Estado ?? slot.estado,
+        estado: slot.estado ?? slot.estado,
         conferencia_publica: slot.conferencia_publica ?? null
       }));
 
@@ -255,8 +255,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Aplicar filtros
     let filtered = slots.filter(slot => {
-      const matchDay = (activeDayFilter === 'all' || slot.Fecha === activeDayFilter);
-      const matchStatus = (activeStatusFilter === 'all' || slot.Estado === activeStatusFilter);
+      const matchDay = (activeDayFilter === 'all' || slot.fecha === activeDayFilter);
+      const matchStatus = (activeStatusFilter === 'all' || slot.estado === activeStatusFilter);
       return matchDay && matchStatus;
     });
 
@@ -278,10 +278,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Agrupar por fecha
     const groupedByDay = {};
     filtered.forEach(slot => {
-      if (!groupedByDay[slot.Fecha]) {
-        groupedByDay[slot.Fecha] = [];
+      if (!groupedByDay[slot.fecha]) {
+        groupedByDay[slot.fecha] = [];
       }
-      groupedByDay[slot.Fecha].push(slot);
+      groupedByDay[slot.fecha].push(slot);
     });
 
     let html = '';
@@ -305,9 +305,9 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       daySlots.forEach(slot => {
-        const isAvailable = slot.Estado === 'Disponible';
-        const isReserved = slot.Estado === 'Reservado';
-        const isBlocked = slot.Estado === 'Bloqueado';
+        const isAvailable = slot.estado === 'Disponible';
+        const isReserved = slot.estado === 'Reservado';
+        const isBlocked = slot.estado === 'Bloqueado';
 
         let badgeClass = 'status-badge--available';
         let badgeLabel = 'Disponible';
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (isBlocked) {
           badgeClass = 'status-badge--blocked';
           badgeLabel = 'Bloqueado';
-        } else if (slot.Estado === 'Cancelado') {
+        } else if (slot.estado === 'Cancelado') {
           badgeClass = 'status-badge--cancelled';
           badgeLabel = 'Cancelado';
         }
@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         html += `
-          <div class="slot-card" data-slot-id="${slot.ID_Horario}">
+          <div class="slot-card" data-slot-id="${slot.id}">
             <div>
               <div class="slot-card__top">
                 <div class="slot-card__time">
@@ -375,8 +375,8 @@ document.addEventListener('DOMContentLoaded', () => {
                   type="button" 
                   class="btn-book" 
                   data-action="book" 
-                  data-slot-id="${slot.ID_Horario}"
-                  aria-label="Reservar horario de ${formatCleanTime(slot.hora_inicio)} a ${formatCleanTime(slot.hora_fin)} el ${formatShortDate(slot.Fecha)}"
+                  data-slot-id="${slot.id}"
+                  aria-label="Reservar horario de ${formatCleanTime(slot.hora_inicio)} a ${formatCleanTime(slot.hora_fin)} el ${formatShortDate(slot.fecha)}"
                 >
                   <svg class="icon" aria-hidden="true"><use href="#icon-lock"></use></svg>
                   <span>Reservar Horario</span>
@@ -418,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    if (slot.Estado !== 'Disponible') {
+    if (slot.estado !== 'Disponible') {
       showToast('Este horario ya no se encuentra disponible para reserva.', 'error');
       loadSlots({ silent: true });
       return;
@@ -439,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Poblar resumen
     DOM.formHorarioId.value = slot.ID_Horario;
-    DOM.summarySlotDate.textContent = formatFriendlyDate(slot.Fecha);
+    DOM.summarySlotDate.textContent = formatFriendlyDate(slot.fecha);
     DOM.summarySlotTime.textContent = `${formatCleanTime(slot.hora_inicio)} – ${formatCleanTime(slot.hora_fin)} (Hora Guatemala)`;
     DOM.summarySlotVenue.textContent = (slot.sede && !slot.sede.includes('Auditorio Central EIME')) ? slot.sede : APP_CONFIG.VENUE_DEFAULT;
 
@@ -556,7 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       DOM.successResCode.textContent = response.codigo_reservacion;
       DOM.successSpeakerName.textContent = response.nombre_expositor;
-      DOM.successSlotDateTime.textContent = `${formatShortDate(response.Fecha)} | ${formatCleanTime(response.hora_inicio)} – ${formatCleanTime(response.hora_fin)}`;
+      DOM.successSlotDateTime.textContent = `${formatShortDate(response.fecha)} | ${formatCleanTime(response.hora_inicio)} – ${formatCleanTime(response.hora_fin)}`;
       DOM.successTalkTitle.textContent = response.titulo_conferencia;
 
       DOM.modalViewSuccess.style.display = 'block';
