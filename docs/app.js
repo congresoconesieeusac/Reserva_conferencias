@@ -194,8 +194,13 @@ document.addEventListener('DOMContentLoaded', () => {
       DOM.btnManualRefresh.classList.add('is-spinning');
     }
 
+
+
     try {
       const data = await ApiService.fetchSlots();
+
+      console.log('Respuesta original de API:', data.horarios);
+      console.log('Primer horario original:', data.horarios[0]);
       
       state.slots = (data.horarios || []).map(slot => ({
         id: slot.id ?? slot.id,
