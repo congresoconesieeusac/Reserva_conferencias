@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       console.log('Respuesta completa de API:', data);
       
-      state.slots = (data || []).map(slot => ({
+      state.slots = state.slots = (data.horarios || []).map(slot => ({
         id: slot.ID_Horario ?? slot.id,
         fecha: slot.Fecha ?? slot.fecha,
         hora_inicio: slot.Hora_inicio ?? slot.hora_inicio,
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Horarios normalizados:', state.slots);
       console.log('Primera fecha:', state.slots[0]?.fecha);
 
-      state.eventInfo = data.evento || null;
+      state.eventInfo = null;
       state.lastUpdateDate = new Date();
 
       // Actualizar hora en encabezado
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateStats(state.slots);
       renderSchedule();
 
-      if (data.isDemoMode && !silent) {
+      if (ApiService.isDemoMode && !silent) {
         showToast('Modo de demostración local activo. Despliegue Apps Script para guardar datos en Google Sheets.', 'info', 6000);
       }
     } catch (err) {
@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearAllFormErrors();
 
     // Poblar resumen
-    DOM.formHorarioId.value = slot.ID_Horario;
+    DOM.formHorarioId.value = slot.id;
     DOM.summarySlotDate.textContent = formatFriendlyDate(slot.fecha);
     DOM.summarySlotTime.textContent = `${formatCleanTime(slot.hora_inicio)} – ${formatCleanTime(slot.hora_fin)} (Hora Guatemala)`;
     DOM.summarySlotVenue.textContent = (slot.sede && !slot.sede.includes('Auditorio Central EIME')) ? slot.sede : APP_CONFIG.VENUE_DEFAULT;
