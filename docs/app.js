@@ -199,8 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const data = await ApiService.fetchSlots();
 
-      console.log('Respuesta original de API:', data.horarios);
-      console.log('Primer horario original:', data.horarios[0]);
+      console.log('Respuesta completa de API:', data);
       
       state.slots = (data.horarios || []).map(slot => ({
         id: slot.id ?? slot.id,
