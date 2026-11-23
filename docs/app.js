@@ -196,7 +196,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const data = await ApiService.fetchSlots();
-      state.slots = data.horarios || [];
+      
+      state.slots = (data.horarios || []).map(slot => ({
+        id: slot.ID_Horario ?? slot.id,
+        fecha: slot.Fecha ?? slot.fecha,
+        hora_inicio: slot.Hora_inicio ?? slot.hora_inicio,
+        hora_fin: slot.Hora_Fin ?? slot.hora_fin,
+        sede: slot.Sede ?? slot.sede,
+        estado: slot.Estado ?? slot.estado,
+        conferencia_publica: slot.conferencia_publica ?? null
+      }));
+
       state.eventInfo = data.evento || null;
       state.lastUpdateDate = new Date();
 
