@@ -79,15 +79,15 @@ const APP_CONFIG = {
   },
 
   // Error codes translated for the user
-  ERROR_MESSAGES: {
-    SLOT_NOT_AVAILABLE: 'The selected time slot has just been booked by another user. Please select another time slot.'
-    SLOT_NOT_FOUND: 'The requested time slot does not exist or has been removed from the system.'
-    RESERVATIONS_DISABLED: 'The reservations system is temporarily closed by the committee.'
-    RATE_LIMITED: 'You have reached the limit of allowed attempts. Please wait one minute before trying again.'
-    SERVER_BUSY: 'The server is processing another concurrent request. Please try sending again.'
-    VALIDATION_ERROR: 'Please check the data entered in the form.'
-    NETWORK_ERROR: 'Unable to connect to the server. Check your internet connection.'
-    SERVER_ERROR: 'An error occurred on the server. Please try again in a few moments.'
+   ERROR_MESSAGES: {
+    SLOT_NOT_AVAILABLE: 'The selected time slot has just been booked by another user. Please select another time slot.',
+    SLOT_NOT_FOUND: 'The requested time slot does not exist or has been removed from the system.',
+    RESERVATIONS_DISABLED: 'The reservations system is temporarily closed by the committee.',
+    RATE_LIMITED: 'You have reached the limit of allowed attempts. Please wait one minute before trying again.',
+    SERVER_BUSY: 'The server is processing another concurrent request. Please try sending again.',
+    VALIDATION_ERROR: 'Please check the data entered in the form.',
+    NETWORK_ERROR: 'Unable to connect to the server. Check your internet connection.',
+    SERVER_ERROR: 'An error occurred on the server. Please try again in a few moments.'    
   }
 };
 
