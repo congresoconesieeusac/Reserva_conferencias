@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   const loadSvgSprites = async () => {
     try {
-      const response = await fetch('assets/icons/icons.svg');
+      const response = await fetch('conesiee-logo.svg');
       if (response.ok) {
         const svgText = await response.text();
         DOM.svgSpriteContainer.innerHTML = svgText;
