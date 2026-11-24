@@ -9,11 +9,10 @@ const ApiService = (() => {
    * @return {boolean}
    */
   const isConfigured = () => {
-    return Boolean(
+      return Boolean(
       APP_CONFIG.API_URL &&
-      APP_CONFIG.API_URL !== '[PEGAR_URL_DE_APPS_SCRIPT]' &&
-      APP_CONFIG.API_URL.startsWith('https://script.google.com')
-    );
+      APP_CONFIG.API_URL.startsWith('https://conesiee-api.congresoconesieeusac.workers.dev')
+      );
   };
 
   /**
