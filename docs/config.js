@@ -8,7 +8,7 @@ const APP_CONFIG = {
   // REQUIRED BOOKMARK: Paste here the URL of the Web App deployed in Apps Script
   // Example: "https://script.google.com/macros/s/AKfycbx.../exec"
   // =========================================================================
- API_URL: 'https://conesiee-api.congresoconesieeusac.workers.dev'
+ API_URL: 'https://conesiee-api.congresoconesieeusac.workers.dev',
 
   // Automatic polling interval in milliseconds (20 seconds)
   POLLING_INTERVAL_MS: 20000,
